@@ -1,8 +1,10 @@
 <script lang="ts">
 	import FormConnStr from '../components/atoms/FormConnStr.svelte';
 	import Main from '../components/template/Main.svelte';
-	import { wsConnString } from '../stores';
-    
+	import stores from '../stores';
+
+	const { wsConnString } = stores;
+
 	function handleSubmit(event: Event) {
 		const target = event.target as HTMLFormElement;
 
@@ -18,7 +20,7 @@
 			const { connectionStr } = data;
 
 			if (connectionStr.length > 0) {
-				wsConnString.set(connectionStr);
+				stores.wsConnString.set(connectionStr);
 			}
 		}
 	}
@@ -29,5 +31,5 @@
 {#if $wsConnString.length === 0}
 	<FormConnStr on:submit={handleSubmit}></FormConnStr>
 {:else}
-	<Main/>
+	<Main />
 {/if}
