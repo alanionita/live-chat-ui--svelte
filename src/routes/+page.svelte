@@ -1,8 +1,10 @@
 <script lang="ts">
 	import FormConnStr from '../components/atoms/FormConnStr.svelte';
-
+	import Main from '../components/template/Main.svelte';
+	import { wsConnString } from '../stores';
+    
 	function handleSubmit(event: Event) {
-        const target = event.target as HTMLFormElement;
+		const target = event.target as HTMLFormElement;
 
 		if (!target) throw Error('Target must be present');
 		if (target) {
@@ -13,11 +15,19 @@
 				const [key, value] = field;
 				data[key] = value;
 			}
-			console.log('Submit data ::', data);
+			const { connectionStr } = data;
+
+			if (connectionStr.length > 0) {
+				wsConnString.set(connectionStr);
+			}
 		}
 	}
 </script>
 
 <h1>Mini Live Chat UI</h1>
 
-<FormConnStr on:submit={handleSubmit}></FormConnStr>
+{#if $wsConnString.length === 0}
+	<FormConnStr on:submit={handleSubmit}></FormConnStr>
+{:else}
+	<Main/>
+{/if}

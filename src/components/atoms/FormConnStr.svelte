@@ -7,7 +7,7 @@
 
 <form on:submit>
 	<label for="connectionStr">
-		<p>Add WebSocket connect string</p>
+		<p>Please add WebSocket connect string</p>
 	</label>
 	<input
 		type="text"
