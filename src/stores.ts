@@ -11,6 +11,8 @@ if (browser) {
     localWsConnString = localStorage.getItem(lsLabelWsConnString) || '';
 }
 
+const wsReady = writable(false);
+
 const wsConnString = writable(localWsConnString);
 wsConnString.subscribe(val => {
     if (browser) {
@@ -31,5 +33,6 @@ userName.subscribe(val => {
 
 export default {
     wsConnString,
+    wsReady,
     userName
 }
