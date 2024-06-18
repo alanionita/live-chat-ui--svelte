@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { userName } from '../../stores';
+	export let ws: any;
+
 	function validate() {
 		console.log("I'm the validate() function");
 		return;
@@ -22,6 +24,12 @@
 			if (name.length > 0) {
 				userName.set(name);
 				window.location.replace('/room');
+				ws.send(
+					JSON.stringify({
+						action: 'createRoom',
+						name
+					})
+				);
 			}
 		}
 	}
